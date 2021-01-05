@@ -1,21 +1,22 @@
 import axios from 'axios';
-import { CategoryCard } from '../components/CategoryCard'
+import { CategoryCard } from '../components'
 import React, { useState, useEffect } from 'react';
 
-function CategoryDetail({route},props) {
+function CategoryList({route}) {
+    console.log(route.params);
     const [mealDetailList, handleMealDetail] = useState([]);
-    const { data } = route.params;
+    const { categoryID } = route.params;
     const mealFilterUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
 
     async function fetchCategoryDetail() {
-        const { data: foo } = await axios.get(mealFilterUrl + data.categories['strCategory']);
-        handleMealDetail(foo)
+        const {data} = await axios.get(mealFilterUrl + categoryID);
+        handleMealDetail()
     }
 
     useEffect(() => { fetchCategoryDetail(); }, [mealDetailList])
 
     function renderCategories({ item }) {
-        <CategoryCard mealDetail={item} onPress={()=>props.navigation.navigate('Detail'), {data : item}}/>
+        <CategoryCard mealDetail={item} onPress={()=>navigation.navigate('Detail'), {data : item}}/>
     }
 
     return (
@@ -29,4 +30,4 @@ function CategoryDetail({route},props) {
     )
 }
 
-export { CategoryDetail }
+export { CategoryList }

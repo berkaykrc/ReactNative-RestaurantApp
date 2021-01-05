@@ -1,25 +1,26 @@
-import CategoryCard from "../components";
+import { CategoryCard } from "../components";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FlatList, View } from "react-native";
 
-function CategoriesPage(props) {
+function CategoriesPage({ navigation}) {
     const [categoriesList, handleCategories] = useState([]);
 
     async function fectData() {
         const response = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php');
-        handleCategories(response.data);
+        categoryObj = response.data.categories.map(category => category);
+        handleCategories(categoryObj)
     }
 
-    useEffect(() => { fectData(); }, [categoriesList]);
+    useEffect(() => { fectData(); }, []);
 
     function selectedCategory(categoryData) {
-        props.navigation.navigate('CategoryList', { data: categoryData })
+        navigation.navigate('CategoryDetailsStack',{screen:'CategoryList'}, { categoryID: categoryData.idCategory })
     }
 
     function renderCategories({ item }) {
         return (
-            <CategoryCard onPress={() => selectedCategory(item)} categoryData={item} />
+            <CategoryCard onPress={selectedCategory(item)} categoryData={item} />
         )
     }
 
@@ -28,7 +29,7 @@ function CategoriesPage(props) {
             <FlatList
                 renderItem={renderCategories}
                 data={categoriesList}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.idCategory}
             />
         </View>
     )

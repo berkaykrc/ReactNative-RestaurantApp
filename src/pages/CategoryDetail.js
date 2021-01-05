@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CategoryCard } from '../components/CategoryCard'
+import { CategoryCard } from '../components'
 import React, { useState, useEffect } from 'react';
 import { Linking } from 'react-native';
 
