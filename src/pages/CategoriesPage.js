@@ -2,13 +2,17 @@ import { CategoryCard } from "../components";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FlatList, View } from "react-native";
-import { CATEGORIES_API_URL } from "@env";
+
+const CATEGORY_URL='https://www.themealdb.com/api/json/v1/1/categories.php'
 
 function CategoriesPage({ navigation }) {
     const [categoriesList, handleCategories] = useState([]);
 
     async function fectData() {
-        const { data: { categories } } = await axios.get(CATEGORIES_API_URL);
+        const { 
+            data: { categories }, 
+        } = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php');
+        console.log(categories)
         handleCategories(categories)
     }
 

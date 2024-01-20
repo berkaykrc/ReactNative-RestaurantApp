@@ -16,7 +16,7 @@ function MealList({ route,navigation }) {
         handleMealList(meals)
     }
 
-    useEffect(() => { fetchMeals(); }, [mealDetailList])
+    useEffect(() => { fetchMeals(); }, [mealList])
 
     function renderMeals({ item }) {
         <CategoryCard mealDetail={item} onPress={() => navigation.navigate('Detail'), { data: item.idMeal }} />
