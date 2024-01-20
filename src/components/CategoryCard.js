@@ -2,7 +2,7 @@ import React from "react";
 import { categoryCardStyles } from "../styles/categoryCardStyle";
 import { Image, Text, View, TouchableOpacity } from "react-native";
 
-function CategoryCard({ categoryData, onPress }) {
+function CategoryCard({ categoryData, onPress, mealDetail }) {
     return (
         <TouchableOpacity style={categoryCardStyles.categoryCardContainer} onPress={onPress}>
             <View style={categoryCardStyles.categoryContent}>
